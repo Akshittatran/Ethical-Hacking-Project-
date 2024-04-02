@@ -1,0 +1,57 @@
+1. Introduction
+
+XSS vulnerabilities arise when untrusted user input is incorporated into web page content without proper validation or sanitization. This allows attackers to inject malicious scripts into seemingly legitimate websites. These scripts execute within the victim's browser, compromising their interaction with the application.
+
+2. Types of XSS vulnerabilities
+
+There are three main categories of XSS vulnerabilities:
+
+Reflected XSS: Injects malicious scripts into a single user's session. The script is reflected back to the user in the web page's response.
+Stored XSS: Malicious scripts are permanently stored on the target server, such as in a forum post or comment. These scripts are displayed to any user who views the content.
+DOM-based XSS: Exploits vulnerabilities in the client-side scripting of a web page. The malicious script resides within the HTML content itself and manipulates the Document Object Model (DOM) of the page.
+Reflected XSS POC
+
+Scenario: A search function on a website takes user input as a search term. The application fails to validate or sanitize this input before reflecting it back in the search results page.
+
+Payload:
+
+<script>alert("XSS Vulnerability Found!")</script>
+Steps to Reproduce:
+
+Visit the website with the vulnerable search function.
+Enter the payload as a search term.
+Submit the search.
+If the website is vulnerable to Reflected XSS, an alert box will appear with the message "XSS Vulnerability Found!"
+Explanation:
+
+The malicious script within the search term is reflected back in the search results page without proper sanitization. When the user's browser renders the page, the script executes, displaying the alert message.
+
+3. Stored XSS POC
+
+Scenario: A forum application allows users to submit comments. The application stores these comments without sanitizing user input.
+
+Payload:
+
+<img src="X" onerror="alert('XSS in Stored Comment!')">
+Steps to Reproduce:
+
+Visit the forum and create a new comment.
+Enter the payload as the comment text.
+Submit the comment.
+Visit the page where the comment is displayed.
+If the website is vulnerable to Stored XSS, an alert box will appear with the message "XSS in Stored Comment!" when the image fails to load.
+Explanation:
+
+The malicious script hidden within the image source attribute is stored along with the comment. When another user views the comment, their browser attempts to load the non-existent image. The onerror event triggers the script, displaying the alert message.
+
+4.  Important Considerations
+
+These are basic examples. Real-world XSS attacks can be much more sophisticated.
+The effectiveness of these payloads can depend on the specific context of the vulnerability.
+Ethical hackers use responsible disclosure practices to report vulnerabilities to the application owner.
+5. Conclusion
+
+This POC report demonstrates the dangers of XSS vulnerabilities. By understanding how these vulnerabilities work, developers and security professionals can implement effective mitigation strategies to protect web applications.
+
+
+this report included with POC video in ppt 
